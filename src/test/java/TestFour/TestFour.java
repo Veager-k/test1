@@ -154,7 +154,7 @@ public class TestFour {
 	
 	@Test
 	@Order(3)
-	public void twoTest() throws InterruptedException {
+	public void scndTest() throws InterruptedException {
 		driver.get("https://demowebshop.tricentis.com/");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		
