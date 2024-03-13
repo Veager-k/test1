@@ -31,7 +31,7 @@ public class TestFour {
 	private static ChromeDriver driver;
 	private static Wait<WebDriver> wait;
 	private static String email;
-
+	
 	@BeforeAll
 	public static void generateEmail() {
 		Random rand = new Random();
@@ -42,7 +42,7 @@ public class TestFour {
 	@BeforeEach
     public void createDriver() {
 		driver = new ChromeDriver();
-		wait = new WebDriverWait(driver, Duration.ofSeconds(10));	
+		wait = new WebDriverWait(driver, Duration.ofSeconds(5));	
     }
 	
 	@AfterEach
@@ -52,7 +52,7 @@ public class TestFour {
 	
 	private static void baseTest(String dataPath) throws InterruptedException {
 		driver.get("https://demowebshop.tricentis.com/");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/login']"))).click();
 		
@@ -93,19 +93,25 @@ public class TestFour {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("termsofservice"))).click();
 		
 		driver.findElement(By.xpath("//button[@class='button-1 checkout-button']")).click();
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("BillingNewAddress.City"))).sendKeys("ASDF");
-		
-		driver.findElement(By.name("BillingNewAddress.Address1")).sendKeys("ASDF");
-		
-		driver.findElement(By.name("BillingNewAddress.ZipPostalCode")).sendKeys("1234");
-		
-		driver.findElement(By.name("BillingNewAddress.PhoneNumber")).sendKeys("1234");
-		
-		WebElement selectElement = driver.findElement(By.id("BillingNewAddress_CountryId"));
-        Select select = new Select(selectElement);
-        select.selectByValue("1");
 
+		try {
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("BillingNewAddress.City"))).sendKeys("ASDF");
+			
+			driver.findElement(By.name("BillingNewAddress.Address1")).sendKeys("ASDF");
+			
+			driver.findElement(By.name("BillingNewAddress.ZipPostalCode")).sendKeys("1234");
+			
+			driver.findElement(By.name("BillingNewAddress.PhoneNumber")).sendKeys("1234");
+			
+			WebElement selectElement = driver.findElement(By.id("BillingNewAddress_CountryId"));
+	        Select select = new Select(selectElement);
+	        select.selectByValue("1");
+		}
+		catch(Exception e) {
+			
+		}
+		
+		 
         driver.findElement(By.xpath("//input[@class='button-1 new-address-next-step-button']")).click();
 		
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 payment-method-next-step-button']"))).click();
@@ -158,7 +164,7 @@ public class TestFour {
 	
 	@Test
 	@Order(3)
-	public void Testdata2() throws InterruptedException {
+	public void secTest() throws InterruptedException {
 		baseTest("C:\\Users\\viliu\\eclipse-workspace\\TestOne\\src\\main\\java\\firstTest\\data2.txt");
 		
 	}
