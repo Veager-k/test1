@@ -16,36 +16,63 @@ import java.io.File;
 import java.io.FileNotFoundException;  
 import java.util.Scanner;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder; 
-import org.junit.jupiter.api.MethodOrderer; 
-import static org.junit.jupiter.api.Assertions.*; 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+
+//@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestFour {
 	private static ChromeDriver driver;
 	private static Wait<WebDriver> wait;
 	private static String email;
 	
-	@BeforeAll
+	@BeforeClass
 	public static void generateEmail() {
+		System.out.println("acc created");
 		Random rand = new Random();
 		int randEmailNum = rand.nextInt(10000);
 		email = randEmailNum + "someemail" + randEmailNum + "@email.com";
+		
+		driver = new ChromeDriver();
+		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		
+		driver.get("https://demowebshop.tricentis.com/");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/login']"))).click();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 register-button']"))).click();
+				
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("gender-male"))).click();
+		
+		driver.findElement(By.id("FirstName")).sendKeys("firstname");
+		
+		driver.findElement(By.id("LastName")).sendKeys("lastname");
+		
+		driver.findElement(By.id("Email")).sendKeys(email);
+		
+		driver.findElement(By.id("Password")).sendKeys("password1");
+		
+		driver.findElement(By.id("ConfirmPassword")).sendKeys("password1");
+		
+		driver.findElement(By.id("register-button")).click();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 register-continue-button']"))).click();
+		System.out.println("acc created");
+		driver.quit();
 	}
 	
-	@BeforeEach
+	@Before
     public void createDriver() {
 		driver = new ChromeDriver();
 		wait = new WebDriverWait(driver, Duration.ofSeconds(5));	
     }
 	
-	@AfterEach
+	@After
     public void quit() {
 		driver.quit();
     }
@@ -128,42 +155,18 @@ public class TestFour {
         
         assertTrue(result.contentEquals("Your order has been successfully processed!"));
 	}
-
+	/*
 	@Test
-	@Order(1)
 	public void createAccount() throws InterruptedException {
-		driver.get("https://demowebshop.tricentis.com/");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-			
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/login']"))).click();
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 register-button']"))).click();
-				
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("gender-male"))).click();
-		
-		driver.findElement(By.id("FirstName")).sendKeys("firstname");
-		
-		driver.findElement(By.id("LastName")).sendKeys("lastname");
-		
-		driver.findElement(By.id("Email")).sendKeys(email);
-		
-		driver.findElement(By.id("Password")).sendKeys("password1");
-		
-		driver.findElement(By.id("ConfirmPassword")).sendKeys("password1");
-		
-		driver.findElement(By.id("register-button")).click();
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 register-continue-button']"))).click();
 	}
-	
+	*/
 	@Test
-	@Order(2)
 	public void test() throws InterruptedException {
 		baseTest("C:\\Users\\viliu\\eclipse-workspace\\TestOne\\src\\main\\java\\firstTest\\data1.txt");
 	}
 	
 	@Test
-	@Order(3)
 	public void testSec2() throws InterruptedException {
 		baseTest("C:\\Users\\viliu\\eclipse-workspace\\TestOne\\src\\main\\java\\firstTest\\data2.txt");
 		
