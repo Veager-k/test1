@@ -31,9 +31,9 @@ public class TestFour {
 	private static ChromeDriver driver;
 	private static Wait<WebDriver> wait;
 	private static String email;
-	
+
 	@BeforeAll
-	public static void generateEmail() {
+	public void generateEmail() {
 		Random rand = new Random();
 		int randEmailNum = rand.nextInt(10000);
 		email = randEmailNum + "someemail" + randEmailNum + "@email.com";
@@ -198,19 +198,7 @@ public class TestFour {
 		
 		driver.findElement(By.xpath("//button[@class='button-1 checkout-button']")).click();
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("BillingNewAddress.City"))).sendKeys("ASDF");
-		
-		driver.findElement(By.name("BillingNewAddress.Address1")).sendKeys("ASDF");
-		
-		driver.findElement(By.name("BillingNewAddress.ZipPostalCode")).sendKeys("1234");
-		
-		driver.findElement(By.name("BillingNewAddress.PhoneNumber")).sendKeys("1234");
-		
-		WebElement selectElement = driver.findElement(By.id("BillingNewAddress_CountryId"));
-        Select select = new Select(selectElement);
-        select.selectByValue("1");
-
-        driver.findElement(By.xpath("//input[@class='button-1 new-address-next-step-button']")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 new-address-next-step-button']"))).click();
 		
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 payment-method-next-step-button']"))).click();
         
