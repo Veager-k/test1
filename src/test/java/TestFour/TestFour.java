@@ -16,9 +16,6 @@ import java.io.File;
 import java.io.FileNotFoundException;  
 import java.util.Scanner;
 
-
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
