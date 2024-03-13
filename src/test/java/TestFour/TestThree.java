@@ -2,6 +2,7 @@ package TestFour;
 
 import java.time.Duration;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,8 +11,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static org.junit.jupiter.api.Assertions.*; 
 
-import junit.framework.Assert;
 
 
 public class TestThree {
@@ -42,7 +43,7 @@ public class TestThree {
         String progress = progressBar.getText();
         
         try {
-        	Assert.assertTrue(progress.contentEquals("0%"));
+        	assertTrue(progress.contentEquals("0%"));
         } finally {
         	driver.quit();
         }
@@ -95,8 +96,8 @@ public class TestThree {
 			System.out.println(totalPages.getText());
 			System.out.println(totalPages.getText().contentEquals("1"));
 			
-        	Assert.assertTrue(currPage.getAttribute("value").contentEquals("1"));
-        	Assert.assertTrue(totalPages.getText().contentEquals("1"));
+			assertTrue(currPage.getAttribute("value").contentEquals("1"));
+			assertTrue(totalPages.getText().contentEquals("1"));
         	
         } finally {
         	driver.quit();

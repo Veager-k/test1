@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileNotFoundException;  
 import java.util.Scanner;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,6 +23,8 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder; 
 import org.junit.jupiter.api.MethodOrderer; 
+import static org.junit.jupiter.api.Assertions.*; 
+
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestFour {
@@ -148,6 +149,6 @@ public class TestFour {
         String result = title.getText();
         
         
-        Assert.assertTrue(result.contentEquals("Your order has been successfully processed!"));
+        assertTrue(result.contentEquals("Your order has been successfully processed!"));
 	}
 }
