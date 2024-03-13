@@ -33,7 +33,7 @@ public class TestFour {
 	private static String email;
 
 	@BeforeAll
-	public void generateEmail() {
+	public static void generateEmail() {
 		Random rand = new Random();
 		int randEmailNum = rand.nextInt(10000);
 		email = randEmailNum + "someemail" + randEmailNum + "@email.com";
