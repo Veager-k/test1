@@ -42,7 +42,7 @@ public class TestFour {
 	@BeforeEach
     public void createDriver() {
 		driver = new ChromeDriver();
-		wait = new WebDriverWait(driver, Duration.ofSeconds(2));	
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));	
     }
 	
 	@AfterEach
