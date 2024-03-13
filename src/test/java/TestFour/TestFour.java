@@ -164,7 +164,7 @@ public class TestFour {
 	
 	@Test
 	@Order(3)
-	public void secTest() throws InterruptedException {
+	public void testSec2() throws InterruptedException {
 		baseTest("C:\\Users\\viliu\\eclipse-workspace\\TestOne\\src\\main\\java\\firstTest\\data2.txt");
 		
 	}
