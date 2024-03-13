@@ -91,7 +91,7 @@ public class TestFour {
 		
 		driver.findElement(By.xpath("//input[@class='button-1 login-button']")).click();
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/digital-downloads']"))).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/di3gital-downloads']"))).click();
 		
 
 		
@@ -154,7 +154,7 @@ public class TestFour {
 	
 	@Test
 	@Order(3)
-	public void testTwo() throws InterruptedException {
+	public void testSecond() throws InterruptedException {
 		driver.get("https://demowebshop.tricentis.com/");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		
