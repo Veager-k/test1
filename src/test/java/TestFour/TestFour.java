@@ -49,37 +49,8 @@ public class TestFour {
     public void quit() {
 		driver.quit();
     }
-
-	@Test
-	@Order(1)
-	public void createAccount() throws InterruptedException {
-		driver.get("https://demowebshop.tricentis.com/");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-			
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/login']"))).click();
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 register-button']"))).click();
-				
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("gender-male"))).click();
-		
-		driver.findElement(By.id("FirstName")).sendKeys("firstname");
-		
-		driver.findElement(By.id("LastName")).sendKeys("lastname");
-		
-		driver.findElement(By.id("Email")).sendKeys(email);
-		
-		driver.findElement(By.id("Password")).sendKeys("password1");
-		
-		driver.findElement(By.id("ConfirmPassword")).sendKeys("password1");
-		
-		driver.findElement(By.id("register-button")).click();
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 register-continue-button']"))).click();
-	}
 	
-	@Test
-	@Order(2)
-	public void test() throws InterruptedException {
+	private static void baseTest(String dataPath) throws InterruptedException {
 		driver.get("https://demowebshop.tricentis.com/");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		
@@ -96,7 +67,7 @@ public class TestFour {
 
 		
 		try {
-		      File myObj = new File("C:\\Users\\viliu\\eclipse-workspace\\TestOne\\src\\main\\java\\firstTest\\data1.txt");
+		      File myObj = new File(dataPath);
 		      Scanner myReader = new Scanner(myObj);
 		      while (myReader.hasNextLine()) {
 		        String data = myReader.nextLine().toLowerCase().replaceAll(" ", "-");        
@@ -151,67 +122,44 @@ public class TestFour {
         
         assertTrue(result.contentEquals("Your order has been successfully processed!"));
 	}
+
+	@Test
+	@Order(1)
+	public void createAccount() throws InterruptedException {
+		driver.get("https://demowebshop.tricentis.com/");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/login']"))).click();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 register-button']"))).click();
+				
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("gender-male"))).click();
+		
+		driver.findElement(By.id("FirstName")).sendKeys("firstname");
+		
+		driver.findElement(By.id("LastName")).sendKeys("lastname");
+		
+		driver.findElement(By.id("Email")).sendKeys(email);
+		
+		driver.findElement(By.id("Password")).sendKeys("password1");
+		
+		driver.findElement(By.id("ConfirmPassword")).sendKeys("password1");
+		
+		driver.findElement(By.id("register-button")).click();
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 register-continue-button']"))).click();
+	}
+	
+	@Test
+	@Order(2)
+	public void test() throws InterruptedException {
+		baseTest("C:\\Users\\viliu\\eclipse-workspace\\TestOne\\src\\main\\java\\firstTest\\data1.txt");
+	}
 	
 	@Test
 	@Order(3)
 	public void Testdata2() throws InterruptedException {
-		driver.get("https://demowebshop.tricentis.com/");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		baseTest("C:\\Users\\viliu\\eclipse-workspace\\TestOne\\src\\main\\java\\firstTest\\data2.txt");
 		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/login']"))).click();
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Email"))).sendKeys(email);
-		
-		driver.findElement(By.id("Password")).sendKeys("password1");
-		
-		driver.findElement(By.xpath("//input[@class='button-1 login-button']")).click();
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/digital-downloads']"))).click();
-		
-
-		
-		try {
-		      File myObj = new File("C:\\Users\\viliu\\eclipse-workspace\\TestOne\\src\\main\\java\\firstTest\\data2.txt");
-		      Scanner myReader = new Scanner(myObj);
-		      while (myReader.hasNextLine()) {
-		        String data = myReader.nextLine().toLowerCase().replaceAll(" ", "-");        
-		        
-		        if(data.contentEquals("3rd-album")) {
-		        	data = "album-3";
-		        }
-		        
-		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href='/" + data +"']"))).click();
-		        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 add-to-cart-button']"))).click();
-		        
-		        Thread.sleep(1000);
-		        driver.navigate().back();
-		      }
-		      myReader.close();
-		    } catch (FileNotFoundException e) {
-		      System.out.println("An error occurred.");
-		      e.printStackTrace();
-		    }
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class='cart-label']"))).click();
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("termsofservice"))).click();
-		
-		driver.findElement(By.xpath("//button[@class='button-1 checkout-button']")).click();
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 new-address-next-step-button']"))).click();
-		
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 payment-method-next-step-button']"))).click();
-        
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 payment-info-next-step-button']"))).click();
-        
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@class='button-1 confirm-order-next-step-button']"))).click();
-        
-        
-        
-        WebElement title = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='title']")));
-        String result = title.getText();
-        
-        
-        assertTrue(result.contentEquals("Your order has been successfully processed!"));
 	}
 }
