@@ -1,4 +1,4 @@
-package firstTest;
+package TestFour;
 
 import java.time.Duration;
 import java.util.List;
@@ -43,7 +43,6 @@ public class TestFour {
 	
 	@BeforeEach
     public void createDriver() {
-		System.out.println("before block");
 		driver = new ChromeDriver();
 		wait = new WebDriverWait(driver, Duration.ofSeconds(2));	
     }
